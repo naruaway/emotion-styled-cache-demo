@@ -13,4 +13,4 @@ WITH_SERIALIZED_STYLE_CACHE=1 node ./dist/main.js
 WITH_SERIALIZED_STYLE_CACHE=1 EMOTION_SINGLE_FUNCTION_SPECIAL_HANDLING=1 node ./dist/main.js
 ```
 
-From these results, you can see that adding a special handling ([done in the patch inside this repo](./patches/)) for `serializeStyles` in `@emotion/serialize` is helpful to implement possibly efficient caching strategy in UI libraries.
+From these results, you can see that adding a special handling ([done in the patch inside this repo](./patches/) and [created a PR in emotion](https://github.com/emotion-js/emotion/pull/2513)) for `serializeStyles` in `@emotion/serialize` is helpful to implement possibly efficient caching strategy in UI libraries.
