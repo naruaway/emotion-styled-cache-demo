@@ -1,0 +1,19 @@
+diff --git a/node_modules/@emotion/serialize/dist/emotion-serialize.esm.js b/node_modules/@emotion/serialize/dist/emotion-serialize.esm.js
+index 3454513..4fe66b2 100644
+--- a/node_modules/@emotion/serialize/dist/emotion-serialize.esm.js
++++ b/node_modules/@emotion/serialize/dist/emotion-serialize.esm.js
+@@ -237,6 +237,14 @@ if (process.env.NODE_ENV !== 'production') {
+ 
+ var cursor;
+ var serializeStyles = function serializeStyles(args, registered, mergedProps) {
++  if (+process.env.EMOTION_SINGLE_FUNCTION_SPECIAL_HANDLING) {
++    // special handling for a case where the only argument is a function, which might return already serialized object (e.g. {name:'css-xyz123',styled:'color:red'})
++    if (args.length === 1 && typeof args[0] === 'function') {
++      const previousCursor = cursor
++      args = [args[0](mergedProps, registered)]
++      cursor = previousCursor
++    }
++  }
+   if (args.length === 1 && typeof args[0] === 'object' && args[0] !== null && args[0].styles !== undefined) {
+     return args[0];
+   }
